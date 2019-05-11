@@ -7,6 +7,7 @@ import Maps from "views/Maps/Maps.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import Transactions from "views/Transactions/Transactions";
 import Logout from "components/Logout/Logout";
+import Graph from "views/Graph/Graph";
 var dashRoutes = [
   // {
   //   path: "/dashboard",
@@ -18,7 +19,7 @@ var dashRoutes = [
     path: "/transactions",
     name: "Transactions",
     icon: "nc-icon nc-bullet-list-67",
-    component : Transactions
+    component: Transactions
   },
   {
     path: "/user-page",
@@ -26,12 +27,19 @@ var dashRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage
   },
-{
-  path: "/logout",
-  name: "Logout",
-  icon: "nc-icon nc-key-25",
-  component: Logout
-},
+  {
+    path: "/graph",
+    name: "Graph",
+    icon: "nc-icon nc-bank",
+    component: Graph
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    icon: "nc-icon nc-key-25",
+    component: Logout
+  },
+
   { redirect: true, path: "/", pathTo: "/transactions", name: "Transactions" }
 ];
 export default dashRoutes;
