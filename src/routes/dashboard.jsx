@@ -5,7 +5,7 @@ import Typography from "views/Typography/Typography.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import Maps from "views/Maps/Maps.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
-
+import Transactions from "views/Transactions/Transactions";
 var dashRoutes = [
   {
     path: "/dashboard",
@@ -14,17 +14,10 @@ var dashRoutes = [
     component: Dashboard
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-diamond",
-    component: Icons
-  },
-  { path: "/maps", name: "Maps", icon: "nc-icon nc-pin-3", component: Maps },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications
+    path: "/transactions",
+    name: "Transactions",
+    icon: "nc-icon nc-bullet-list-67",
+    component : Transactions
   },
   {
     path: "/user-page",
@@ -32,24 +25,7 @@ var dashRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage
   },
-  {
-    path: "/tables",
-    name: "Table List",
-    icon: "nc-icon nc-tile-56",
-    component: TableList
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: Typography
-  },
-  {
-    pro: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "nc-icon nc-spaceship"
-  },
+
   { redirect: true, path: "/", pathTo: "/dashboard", name: "Dashboard" }
 ];
 export default dashRoutes;
