@@ -58,7 +58,7 @@ export default class Graph extends Component {
     return (
       <div className="content">
         <div id="treeWrapper" style={{ width: "100em", height: "50em" }}>
-          <Tree data={myTreeData} />
+          <Tree data={this.state.transactions} />
         </div>
       </div>
     );

@@ -20,6 +20,7 @@ import { thead, tbody } from "variables/general";
 import "./Transactions.css";
 import withAuth from "components/Login/withAuth";
 import Api from "service/Api";
+import { timeout } from "q";
 const api = new Api();
 class Transactions extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Transactions extends Component {
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeParent = this.handleChangeParent.bind(this);
     this.handleChangeBudget = this.handleChangeBudget.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   toggle() {
     this.setState(prevState => ({
@@ -76,6 +78,20 @@ class Transactions extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const form = {
+      subject: this.state.projectname,
+      body: this.state.description,
+      amount: this.state.budget,
+      parent : this.state.parentproject
+    }
+    console.log(form);
+    api.postData("/transactions", form).then((response) => {
+      console.log(response);
+     this.setState({
+        modal: !this.state.modal,
+        transactions:response.data,
+      });
+    });
      }
   render() {
     let tdata = Object.entries(this.state.transactions).map( (res)=>{
@@ -133,10 +149,10 @@ class Transactions extends Component {
               <div className="row">
                 <div className="form-group col-md-12">
                   <label>Parent Project:</label>
-                  <select>
+                  <select onChange={this.handleChangeParent} value={this.state.parentproject}>
                   {Object.keys(this.state.transactions).map((key)=>{
                     return (
-                      <option>{  
+                      <option value={key}>{  
                         Object.entries(this.state.transactions).map((res)=>{
                           if(res[0]==key){
                           return (res[1].TransactionInfo.Subject)

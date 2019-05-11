@@ -57,10 +57,21 @@ export default function TransformData(data) {
     allval[val.HashID] = val;
   });
   */
+ const new_data = []
 
-  let _data = Object.values(data);
+  let _data = Object.values(data).forEach((res)=>{
+    console.log(res.TransactionInfo.Subject);
+    new_data.push({
+      name:res.TransactionInfo.Subject,
+      attributes:
+        res.TransactionInfo,
+    })
 
-  return listToTree(_data, {
+  });
+
+  console.log("=====",new_data,"====");
+
+  return listToTree(new_data, {
     idKey: "HashID",
     parentKey: "ParentHash"
   });
@@ -84,7 +95,7 @@ function listToTree(data, options) {
     childrenOf[id] = childrenOf[id] || [];
     // init its children
     item[CHILDREN_KEY] = childrenOf[id];
-    if (parentId != "") {
+    if (parentId !== "") {
       // init its parent's children object
       childrenOf[parentId] = childrenOf[parentId] || [];
       // push it into its parent's children object
