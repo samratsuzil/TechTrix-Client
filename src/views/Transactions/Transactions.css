@@ -1,6 +1,9 @@
 .addtransaction.right{
 text-align:  right;
 }
-.addtransaction {
+#addtransaction {
     font-size: 2em;
+}
+#transactions table tr,td{
+    font-size: 13px;
 }

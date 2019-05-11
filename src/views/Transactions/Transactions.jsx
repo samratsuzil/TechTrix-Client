@@ -26,10 +26,19 @@ class Transactions extends Component {
     super(props);
     this.state = {
       modal: false,
-      transactions: {}
+      transactions: {},
+      projectname : "",
+      description : "",
+      parentproject :"",
+      budget: ""
+
     };
     this.toggle = this.toggle.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
+    this.handleChangeProject = this.handleChangeProject.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeParent = this.handleChangeParent.bind(this);
+    this.handleChangeBudget = this.handleChangeBudget.bind(this);
   }
   toggle() {
     this.setState(prevState => ({
@@ -43,60 +52,123 @@ class Transactions extends Component {
 
   getTransactions() {
     api.getData("/transactions").then(res => {
-      console.log(res.data);
-      if (res.data.length > 0) {
+        console.log(res);
         this.setState({
           transactions: res.data
         });
-      }
+      
     });
   }
 
+  handleChangeProject(event) {
+    this.setState({projectname: event.target.value});
+  }
+  handleChangeDescription(event) {
+    this.setState({description: event.target.value});
+  }
+  handleChangeParent(event) {
+    this.setState({parentproject: event.target.value});
+  }
+  handleChangeBudget(event) {
+    this.setState({budget: event.target.value});
+  }
+
+
+  handleSubmit(event) {
+    event.preventDefault();
+     }
   render() {
-    console.log(this.state.transactions);
+    let tdata = Object.entries(this.state.transactions).map( (res)=>{
+        let transactions = res[1];
+        let transactioninfo = res[1].TransactionInfo
+        return (
+        <tr>
+            {/* <td>{transactions.HashID}</td> */}
+            <td>{Date(transactioninfo.CreatedAt)}</td>
+            <td>{transactioninfo.Subject}</td>
+            <td>{transactioninfo.Body}</td>
+            <td>{
+              Object.entries(this.state.transactions).map((res)=>{
+                if(transactions.ParentHash === res[0]){
+                  return(res[1].TransactionInfo.Subject);
+                }
+
+              })
+              
+              }</td>
+            <td>{transactioninfo.Amount}</td>
+        </tr>);
+        }    
+    );
+
+    
+
     return (
       <div className="content">
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <ModalHeader>Add New Transaction</ModalHeader>
             <ModalBody>
               <div className="row">
-                <div className="form-group col-md-6">
-                  <label>Name:</label>
+                <div className="form-group col-md-12">
+                  <label>Project Name:</label>
                   <input
                     type="text"
-                    value={this.state.name}
-                    onChange={this.handleChangeName}
+                    value={this.state.projectname}
+                    onChange={this.handleChangeProject}
                     className="form-control"
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="form-group col-md-4">
-                  <label>Team:</label>
-                  <input
-                    type="text"
-                    value={this.state.team}
-                    onChange={this.handleChangeTeam}
+                <div className="form-group col-md-12">
+                  <label>Description:</label>
+                  <textarea
+                    value={this.state.description}
+                    onChange={this.handleChangeDescription}
                     className="form-control"
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="form-group col-md-4">
-                  <label>Country:</label>
+                <div className="form-group col-md-12">
+                  <label>Parent Project:</label>
+                  <select>
+                  {Object.keys(this.state.transactions).map((key)=>{
+                    return (
+                      <option>{  
+                        Object.entries(this.state.transactions).map((res)=>{
+                          if(res[0]==key){
+                          return (res[1].TransactionInfo.Subject)
+                          }
+                        })
+                      }</option>
+                      );
+                  })}
+                  </select>
+                  {/* <input
+                    type="textarea"
+                    value={this.state.parentproject}
+                    onChange={this.handleChangeParent}
+                    className="form-control"
+                  /> */}
+                </div>
+              </div>
+              <div className="row">
+                <div className="form-group col-md-12">
+                  <label>Budget:</label>
                   <input
-                    type="text"
-                    value={this.country}
-                    onChange={this.handleChangeCountry}
+                    type="textarea"
+                    value={this.state.budget}
+                    onChange={this.handleChangeBudget}
                     className="form-control"
                   />
                 </div>
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggle}>
-                Do Something
+              <Button color="primary" type="submit">
+                Add
               </Button>{" "}
               <Button color="secondary" onClick={this.toggle}>
                 Cancel
@@ -108,12 +180,14 @@ class Transactions extends Component {
           <Col xs={12}>
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Transactions</CardTitle>
-                <div className="addtransaction right" onClick={this.toggle}>
-                  <i className="nc-icon nc-simple-add" />
-                </div>
+                <CardTitle tag="h4">Transactions
+                </CardTitle>
+                <i id="addtransaction" className="nc-icon nc-simple-add" onClick={this.toggle} />
+
+                
               </CardHeader>
               <CardBody>
+                <div id="transactions">
                 <Table responsive>
                   <thead className="text-primary">
                     <tr>
@@ -129,11 +203,10 @@ class Transactions extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {this.state.transactions.map(key => {
-                      return <tr key={key} />;
-                    })} */}
+                   {tdata}
                   </tbody>
                 </Table>
+                </div>
               </CardBody>
             </Card>
           </Col>

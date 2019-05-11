@@ -2,7 +2,7 @@
 // // // table head data and table body data for Tables view
 // #############################
 
-const thead = ["ID", "Date", "Tender Name", "Parent Tender", "Budget"];
+const thead = ["Date", "Tender Name","Description", "Parent Tender", "Budget"];
 const tbody = [
   {
     data: ["2u394o2o3h4jk2h3k4hkj2jk34hk", "2019/1/30", "Melamchi water development","root", "Nrs.30,00,000"]
