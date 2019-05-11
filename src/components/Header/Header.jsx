@@ -121,7 +121,7 @@ class Header extends React.Component {
               (this.state.color === "transparent" ? "navbar-transparent " : "")
         }
       >
-        <Container fluid>
+        {/* <Container fluid>
           <div className="navbar-wrapper">
             <div className="navbar-toggle">
               <button
@@ -193,7 +193,7 @@ class Header extends React.Component {
               </NavItem>
             </Nav>
           </Collapse>
-        </Container>
+        </Container> */}
       </Navbar>
     );
   }
