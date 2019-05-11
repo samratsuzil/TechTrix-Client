@@ -8,16 +8,14 @@ import "assets/scss/paper-dashboard.scss";
 import "assets/demo/demo.css";
 import Login from "components/Login/Login";
 import indexRoutes from "routes/index.jsx";
-
+import Dashboard from "layouts/Dashboard/Dashboard.jsx";
 const hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
     <Route exact path="/login" name="Login" component={Login}></Route>
-      {indexRoutes.map((prop, key) => {
-        return <Route path={prop.path} key={key} component={prop.component} />;
-      })}
+    <Route path="/" name="Dashboard" component={Dashboard}></Route>
     </Switch>
   </Router>,
   document.getElementById("root")

@@ -11,7 +11,8 @@ import {
   } from "reactstrap";
   
   import { thead, tbody } from "variables/general";
-
+  import "./Transactions.css";
+import withAuth from "components/Login/withAuth";
 class Transactions extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,9 @@ class Transactions extends Component {
             <Card>
               <CardHeader>
                 <CardTitle tag="h4">Transactions</CardTitle>
+                <div className="addtransaction right">
+                <i className="nc-icon nc-simple-add"></i>
+                </div>
               </CardHeader>
               <CardBody>
                 <Table responsive>

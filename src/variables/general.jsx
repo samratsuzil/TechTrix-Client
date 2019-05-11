@@ -2,33 +2,15 @@
 // // // table head data and table body data for Tables view
 // #############################
 
-const thead = ["Name", "Country", "City", "Salary"];
+const thead = ["ID", "Date", "Tender Name", "Parent Tender", "Budget"];
 const tbody = [
   {
-    className: "table-success",
-    data: ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"]
+    data: ["2u394o2o3h4jk2h3k4hkj2jk34hk", "2019/1/30", "Melamchi water development","root", "Nrs.30,00,000"]
   },
   {
-    className: "",
-    data: ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"]
+    data: ["7796gtiu8a6sd7a686s8d6a78s7d", "2019/2/10", "Plumbing", "Melamchi water development","Nrs.30,000"]
   },
-  {
-    className: "table-info",
-    data: ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"]
-  },
-  {
-    className: "",
-    data: ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"]
-  },
-  {
-    className: "table-danger",
-    data: ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"]
-  },
-  { className: "", data: ["Mason Porter", "Chile", "Gloucester", "$78,615"] },
-  {
-    className: "table-warning",
-    data: ["Jon Porter", "Portugal", "Gloucester", "$98,615"]
-  }
+ 
 ];
 
 // data for <thead> of table in TableList view

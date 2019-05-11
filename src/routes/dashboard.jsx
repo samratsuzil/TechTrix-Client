@@ -6,13 +6,14 @@ import TableList from "views/TableList/TableList.jsx";
 import Maps from "views/Maps/Maps.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import Transactions from "views/Transactions/Transactions";
+import Logout from "components/Logout/Logout";
 var dashRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-bank",
-    component: Dashboard
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-bank",
+  //   component: Dashboard
+  // },
   {
     path: "/transactions",
     name: "Transactions",
@@ -25,7 +26,12 @@ var dashRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage
   },
-
-  { redirect: true, path: "/", pathTo: "/dashboard", name: "Dashboard" }
+{
+  path: "/logout",
+  name: "Logout",
+  icon: "nc-icon nc-key-25",
+  component: Logout
+},
+  { redirect: true, path: "/", pathTo: "/transactions", name: "Transactions" }
 ];
 export default dashRoutes;
