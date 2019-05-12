@@ -41,6 +41,7 @@ class Transactions extends Component {
     this.handleChangeParent = this.handleChangeParent.bind(this);
     this.handleChangeBudget = this.handleChangeBudget.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectionref = React.createRef()
   }
   toggle() {
     this.setState(prevState => ({
@@ -69,6 +70,7 @@ class Transactions extends Component {
     this.setState({description: event.target.value});
   }
   handleChangeParent(event) {
+    console.log("0-0",event,"89");
     this.setState({parentproject: event.target.value});
   }
   handleChangeBudget(event) {
@@ -77,12 +79,11 @@ class Transactions extends Component {
 
 
   handleSubmit(event) {
-    event.preventDefault();
     const form = {
       subject: this.state.projectname,
       body: this.state.description,
       amount: this.state.budget,
-      parent : this.state.parentproject
+      parent : this.selectionref.current.value
     }
     console.log(form);
     api.postData("/transactions", form).then((response) => {
@@ -92,6 +93,8 @@ class Transactions extends Component {
         transactions:response.data,
       });
     });
+    event.preventDefault();
+
      }
   render() {
     let tdata = Object.entries(this.state.transactions).map( (res)=>{
@@ -100,7 +103,7 @@ class Transactions extends Component {
         return (
         <tr>
             {/* <td>{transactions.HashID}</td> */}
-            <td>{Date(transactioninfo.CreatedAt)}</td>
+            <td>{transactioninfo.CreatedAt}</td>
             <td>{transactioninfo.Subject}</td>
             <td>{transactioninfo.Body}</td>
             <td>{
@@ -149,10 +152,10 @@ class Transactions extends Component {
               <div className="row">
                 <div className="form-group col-md-12">
                   <label>Parent Project:</label>
-                  <select onChange={this.handleChangeParent} value={this.state.parentproject}>
+                  <select onChange={this.handleChangeParent} ref={this.selectionref}>
                   {Object.keys(this.state.transactions).map((key)=>{
                     return (
-                      <option value={key}>{  
+                      <option key={key} value={key}>{  
                         Object.entries(this.state.transactions).map((res)=>{
                           if(res[0]==key){
                           return (res[1].TransactionInfo.Subject)

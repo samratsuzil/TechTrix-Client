@@ -21,12 +21,12 @@ var dashRoutes = [
     icon: "nc-icon nc-bullet-list-67",
     component: Transactions
   },
-  {
-    path: "/user-page",
-    name: "User Profile",
-    icon: "nc-icon nc-single-02",
-    component: UserPage
-  },
+  // {
+  //   path: "/user-page",
+  //   name: "User Profile",
+  //   icon: "nc-icon nc-single-02",
+  //   component: UserPage
+  // },
   {
     path: "/graph",
     name: "Graph",

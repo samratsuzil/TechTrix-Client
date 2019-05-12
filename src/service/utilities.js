@@ -59,16 +59,26 @@ export default function TransformData(data) {
   */
  const new_data = []
 
-  let _data = Object.values(data).forEach((res)=>{
+  Object.values(data).forEach((res)=>{
     console.log(res.TransactionInfo.Subject);
+    let childrens = [];
+    Object.values(data).forEach((key)=>{
+      if(key.TransactionInfo.ParentHash === res[0]){
+        childrens.push(
+          {
+          name: key.TransactionInfo.Subject,
+          attributes: key.TransactionInfo,
+          });
+      }
+    })
     new_data.push({
       name:res.TransactionInfo.Subject,
       attributes:
         res.TransactionInfo,
+        children:childrens,
     })
-
   });
-
+  delete  new_data["childrens"];
   console.log("=====",new_data,"====");
 
   return listToTree(new_data, {
@@ -81,7 +91,7 @@ function listToTree(data, options) {
   options = options || {};
   var ID_KEY = options.idKey || "id";
   var PARENT_KEY = options.parentKey || "parent";
-  var CHILDREN_KEY = options.childrenKey || "children";
+  var CHILDREN_KEY = options.childrenKey || "childrens";
 
   var tree = [],
     childrenOf = {};

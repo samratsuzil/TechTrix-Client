@@ -7,23 +7,63 @@ const api = new Api();
 
 const myTreeData = [
   {
-    name: "Top Level",
+    name: "Metropolitan",
     attributes: {
-      keyA: "val A",
-      keyB: "val B",
-      keyC: "val C"
+      Project: "Bharatpur Metropolitan",
+      Description: "Bharatpur Metropolitan City Budget",
+      Amount: "10000000"
     },
     children: [
       {
-        name: "Level 2: A",
+        name: "Education",
         attributes: {
-          keyA: "val A",
-          keyB: "val B",
-          keyC: "val C"
-        }
+          Description: "Education budget Bharatpur Metropolitan City",
+          Amount: "1000000"
+        },
+        children:[
+          {
+            name: "College Remuneration",
+            attributes: {
+              Description:
+                "College Remuneration budget Bharatpur Metropolitan City",
+              Amount: "10000000"
+            }
+          },
+          {
+            name: "Scholarship",
+            attributes: {
+              Description:
+                "Scholarship  budget Bharatpur Metropolitan City",
+              Amount: "13300000"
+            }
+          },
+        ]
       },
       {
-        name: "Level 2: B"
+        name: "General Infrastructure",
+        attributes: {
+          Description:
+            "General Infrastructure budget Bharatpur Metropolitan City",
+          Amount: "5000000"
+        },
+        children: [
+          {
+            name: "Road Infrastructure",
+            attributes: {
+              Description:
+                "Road Infrastructure budget Bharatpur Metropolitan City",
+              Amount: "500000"
+            }
+          },
+          {
+            name: "Bridges Infrastructure",
+            attributes: {
+              Description:
+                "Bridges Infrastructure budget Bharatpur Metropolitan City",
+              Amount: "600000"
+            }
+          },
+        ]
       }
     ]
   }
@@ -58,7 +98,7 @@ export default class Graph extends Component {
     return (
       <div className="content">
         <div id="treeWrapper" style={{ width: "100em", height: "50em" }}>
-          <Tree data={this.state.transactions} />
+          <Tree data={myTreeData} />
         </div>
       </div>
     );
